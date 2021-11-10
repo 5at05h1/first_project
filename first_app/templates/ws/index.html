@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <title>WS TEST</title>
+  </head>
+  <body>
+    <h1>WS TEST</h1>
+    <form action="" onsubmit="onsubmitButton_Send(); return false;">
+      <input type="submit" value="hello" />
+    </form>
+
+    <script>
+      // WebSocketオブジェクト
+      const ws = new WebSocket("ws://127.0.0.1:8000/ws/12345/");
+
+      // ボタンを押したときの処理
+      function onsubmitButton_Send() {
+        // WebSocketを通したメッセージの送信
+        ws.send(JSON.stringify({ flg: 1 }));
+      }
+
+      // WebSocketクローズ時の処理
+      ws.onclose = (event) => {
+        // ウェブページを閉じたとき以外のWebSocketクローズは想定外
+        console.error("Unexpected : Chat socket closed.");
+      };
+    </script>
+  </body>
+</html>
